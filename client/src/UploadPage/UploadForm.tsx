@@ -53,13 +53,14 @@ export function UploadForm() {
       alert("Please fill in all required fields.");
       return;
     }
-    let compiledSteps = "";
-    let compiledIngredients = "";
+    // Compile into a json format
+    let compiledSteps = {};
+    let compiledIngredients = {};
     steps.forEach((step, index) => {
-      compiledSteps += `${index + 1}: ${step.trim()}\n`
+      compiledSteps[`${index + 1}`] = step 
     })
     ingredients.forEach((ingredient, index) => {
-      compiledIngredients += `${index + 1 }: ${ingredient.trim()}\n`
+      compiledIngredients[`${index + 1 }`] = ingredient.trim()
     })
 
     const submittedRecipe = {

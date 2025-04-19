@@ -8,6 +8,7 @@ from .models import Recipe, Recipe_Book, Review
 from django.db.models import Q
 from django.http import JsonResponse, Http404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.forms.models import model_to_dict
 
 # Load manifest when server launches
 MANIFEST = {}
@@ -30,18 +31,16 @@ def index(req):
 
 @login_required
 def get_own_recipe_books(req):
-    user = User.get(user=req.user)
+    user = req.user
     books = Recipe_Book.objects.filter(user=user)
     response = {
-        "data": books
+        "data": list(books)
     }
     return JsonResponse(response)
 
 
 @login_required
 def upload_recipe(req):
-    print("Uploading recipe...")
-
     try:        
         user = req.user
         name = req.POST.get('name', False)
@@ -73,9 +72,9 @@ def upload_recipe(req):
         )
 
 @login_required
-def get_own_recipes(req):
-    user = User.get(user=req.user)        
+def get_recipes(req):
     book = req.GET.get("book", False)
+    user = req.user
     if book:
         recipe_book = Recipe_Book.filter(user=user,name=book)
         recipes = Recipe.objects.filter(user=user,recipe_books=recipe_book)
@@ -83,7 +82,7 @@ def get_own_recipes(req):
         recipes = Recipe.objects.filter(user=user)
     
     response = {
-        "data": recipes
+        "data": list(recipes.values())
     }
     return JsonResponse(response)
 
@@ -105,7 +104,7 @@ def get_others_recipes(req):
     return JsonResponse(response)
     
 
-def get_home_recipes(req):
+def get_home_recipes(req, id):
     recipes = Recipe.objects.filter()
     pageManager = Paginator(recipes, 25)
     page_num = req.GET.get('page', 1)
@@ -116,8 +115,21 @@ def get_home_recipes(req):
     except EmptyPage:
         page = pageManager.page(pageManager.num_pages)
     response = {
-        "data": page,
+        "data": list(page.object_list.values()),
+        "has_next": page.has_next(),
+        "has_previous": page.has_previous(),
+        "num_pages": pageManager.num_pages,
+        "current_page": page.number,
     }
 
     return JsonResponse(response)
     
+
+def get_recipe(req, id):
+    recipe = Recipe.objects.filter(id=id).first()
+    if not recipe:
+        return JsonResponse({"error": "No recipe found"})
+    recipe_dict = model_to_dict(recipe)
+    if recipe.image:
+        recipe_dict['image'] = recipe.image.url  # Convert ImageFieldFile to URL
+    return JsonResponse(recipe_dict)

@@ -1,4 +1,7 @@
 import React from "react";
+import { Link } from "react-router";
+
+
 async function logout() {
   const res = await fetch("/registration/logout/", {
     credentials: "same-origin", // include cookies!
@@ -17,7 +20,9 @@ export function Header() {
     <div className="header">
       <h1>Recipe Index</h1>
       <nav>
-        <a>Home</a> | <a>Logout</a>
+        <Link to={"/"}>Home</Link> | 
+        <Link to={"/profile"}>Profile</Link> |
+        <a>Logout</a>
       </nav>
     </div>
   );
