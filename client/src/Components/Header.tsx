@@ -22,7 +22,7 @@ export function Header() {
       <nav>
         <Link to={"/"}>Home</Link> | 
         <Link to={"/profile"}>Profile</Link> |
-        <a>Logout</a>
+        <a onClick={logout}>Logout</a>
       </nav>
     </div>
   );

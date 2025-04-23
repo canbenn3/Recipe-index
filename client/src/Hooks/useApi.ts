@@ -1,4 +1,4 @@
-import { recipe, uploadApiProps } from "./types";
+import { recipe, uploadApiProps } from "../types";
 
 const getCSRFToken = () => {
   const csrfToken = document.cookie
@@ -32,8 +32,13 @@ export const useApi = () => ({
     });
   },
 
+  getHomeRecipes: async (page) => {
+    const response = await fetch(`/api/get_home_recipes/${page}`)
+    const data = await response.json();
+    return data;
+  },
+
   getRecipe: async (recipeId: number) => {
-    console.log("fetching recipe", recipeId);
     const res = await fetch(`/api/recipe/${recipeId}/`);
     const data = await res.json();
 
@@ -44,18 +49,12 @@ export const useApi = () => ({
     return data;
   },
 
-  getHomeRecipes: async (page: number) => {
-    const response = await fetch(`/api/get_home_recipes/${page}`);
-    const data = await response.json();
-    return data;
-  },
-
   getRecipeBooks: async () => {
     const response = await fetch("/api/get_own_recipe_books/");
     return response.json();
   },
 
-  getRecipes: async (): Promise<{data:recipe[]}> => {
+  getRecipes: async (): Promise<{ data: recipe[] }> => {
     const response = await fetch("/api/get_recipes/");
     return response.json();
   },

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { recipe } from "../types";
-import { useApi } from "../api";
+import { useApi } from "../Hooks/useApi";
 
 export function Recipe() {
   const [recipe, setRecipe] = useState<recipe | null>(null);

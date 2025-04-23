@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { RecipeCard } from "../Components/RecipeCard";
 import { recipePage } from "../types";
+import { useApi } from "../Hooks/useApi";
 
 export function Home() {
   const [page, setPage] = useState(0);
   const [recipes, setRecipes] = useState<recipePage>();
+  const api = useApi();
 
   useEffect(() => {
     const fetchRecipes = async () => {
-      console.log(page);
-      const response = await fetch(`/api/get_home_recipes/${page}`);
-      const data = await response.json();
-      setRecipes(data);
+      const response = await api.getHomeRecipes(page);
+      setRecipes(response);
     };
     fetchRecipes();
   }, [page]);

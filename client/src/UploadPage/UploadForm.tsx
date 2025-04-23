@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StepInput } from "./StepInput";
 import { IngredientInput } from "./IngredientInput";
 import { ImageDisplay } from "./ImageDisplay";
-import { useApi } from "../api";
+import { useApi } from "../Hooks/useApi";
 
 export function UploadForm() {
 
