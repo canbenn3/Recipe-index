@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Books } from "./Books";
 import { Recipes } from "./Recipes";
 import { useApi } from "../Hooks/useApi";
-import { recipe } from "../types";
+import { recipe } from "../types/types";
 import { Modal } from "../Components/Modal";
 import { NewBookForm } from "./NewBookForm";
 

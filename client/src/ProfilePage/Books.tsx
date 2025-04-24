@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { recipe, recipeBook } from "../types";
+import { useEffect, useState } from "react";
+import { recipe, recipeBook } from "../types/types";
 import { useApi } from "../Hooks/useApi";
 import { Modal } from "../Components/Modal";
 import { NewBookForm } from "./NewBookForm";

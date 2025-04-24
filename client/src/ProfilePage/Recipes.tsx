@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { recipe } from "../types";
+import { useEffect, useState } from "react";
+import { recipe } from "../types/types";
 import { useApi } from "../Hooks/useApi";
 import { RecipeCard } from "../Components/RecipeCard";
 import { useNavigate } from "react-router";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StepInput } from "./StepInput";
 import { IngredientInput } from "./IngredientInput";
 import { ImageDisplay } from "./ImageDisplay";
@@ -54,8 +54,8 @@ export function UploadForm() {
       return;
     }
     // Compile into a json format
-    let compiledSteps = {};
-    let compiledIngredients = {};
+    let compiledSteps: { [key: string]: string } = {};
+    let compiledIngredients: { [key: string]: string } = {};
     steps.forEach((step, index) => {
       compiledSteps[`${index + 1}`] = step 
     })

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { RecipeCard } from "../Components/RecipeCard";
-import { recipePage } from "../types";
+import { recipePage } from "../types/types";
 import { useApi } from "../Hooks/useApi";
 
 export function Home() {
@@ -17,7 +17,7 @@ export function Home() {
   }, [page]);
 
   return (
-    <div className="home">
+    <div className="central-content">
       <h1>Home</h1>
       <div className="recipes-container">
         {recipes?.data.map((recipe) => {

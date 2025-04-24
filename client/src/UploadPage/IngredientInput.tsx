@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { ingredientInputProps } from "../types";
+import { ingredientInputProps } from "../types/types";
 
 export function IngredientInput({
   ingredient,

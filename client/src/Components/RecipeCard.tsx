@@ -1,5 +1,4 @@
-import React from "react";
-import { recipeCardProps } from "../types";
+import { recipeCardProps } from "../types/types";
 import { useNavigate } from "react-router";
 
 export function RecipeCard({ recipe }: recipeCardProps) {

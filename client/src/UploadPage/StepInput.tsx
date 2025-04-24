@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { stepInputProps } from "../types";
+import { stepInputProps } from "../types/types";
 
 export function StepInput({ step, stepNum, setStep }: stepInputProps) {
-
   function setHeight(textarea: HTMLTextAreaElement) {
     textarea.style.height = "auto";
     textarea.style.height = textarea.scrollHeight + "px";

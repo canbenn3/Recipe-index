@@ -20,9 +20,9 @@ export function Header() {
     <div className="header">
       <h1>Recipe Index</h1>
       <nav>
-        <Link to={"/"}>Home</Link> | 
-        <Link to={"/profile"}>Profile</Link> |
-        <a onClick={logout}>Logout</a>
+        <Link className="link" to={"/"}>Home</Link> | 
+        <Link className="link" to={"/profile"}>My Profile</Link> |
+        <a className="link" onClick={logout}>Logout</a>
       </nav>
     </div>
   );

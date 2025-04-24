@@ -1,6 +1,5 @@
-import React from "react";
 import { useState } from "react";
-import { recipe } from "../types";
+import { recipe } from "../types/types";
 import { SelectableCard } from "../Components/SelectableCard";
 
 interface NewBookFormProps {
