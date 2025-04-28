@@ -19,7 +19,7 @@ export function Actions({ onDelete, onEdit, isHorizontal }: ActionsProps) {
     <div className={className}>
       <Printer className="icon" onClick={onPrint} />
       <Trash2 className="icon" onClick={onDelete} />
-      <Pencil className="icon" />
+      <Pencil className="icon" onClick={onEdit} />
     </div>
   );
 }

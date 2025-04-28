@@ -33,7 +33,11 @@ export function Profile() {
 
   return (
     <div className="central-content">
-      <Books books={books} postChange={() => refreshBooks()} />
+      <Books
+        books={books}
+        postChange={() => refreshBooks()}
+        allRecipes={recipes}
+      />
       <button onClick={toggleModal}>Add a new book!</button>
       <Modal show={showModal} closeModal={toggleModal}>
         <NewBookForm

@@ -9,9 +9,10 @@ import { BookDisplay } from "./BookDisplay";
 interface BooksProps {
   books: recipeBook[];
   postChange: () => void;
+  allRecipes: recipe[];
 }
 
-export function Books({ books, postChange }: BooksProps) {
+export function Books({ books, postChange, allRecipes }: BooksProps) {
   const [selectedBook, setSelectedBook] = useState<recipeBook | null>(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -43,6 +44,7 @@ export function Books({ books, postChange }: BooksProps) {
             setShowModal(false);
             postChange();
           }}
+          allRecipes={allRecipes}
         />
       </Modal>
     </div>
