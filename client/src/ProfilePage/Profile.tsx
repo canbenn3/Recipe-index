@@ -19,16 +19,16 @@ export function Profile() {
     fetchRecipes();
   }, []);
 
-  const handleClick = () => {
+  const toggleModal = () => {
     setShowModal((prev) => !prev);
   };
 
   return (
     <div className="central-content">
       <Books recipes={recipes} />
-      <button onClick={handleClick}>Add a new book!</button>
-      <Modal show={showModal} closeModal={handleClick}>
-        <NewBookForm recipes={recipes} />
+      <button onClick={toggleModal}>Add a new book!</button>
+      <Modal show={showModal} closeModal={toggleModal}>
+        <NewBookForm recipes={recipes} postSubmit={toggleModal} />
       </Modal>
       <Recipes recipes={recipes} />
     </div>

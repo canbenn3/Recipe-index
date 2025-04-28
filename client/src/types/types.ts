@@ -51,4 +51,15 @@ export type recipeBook = {
   name: string;
   description: string;
   recipes: recipe[];
+};
+
+export type recipeBookUpload = {
+  name: string;
+  description: string;
+  recipes: number[];
+};
+
+export interface BooksContextType {
+  books: recipeBook[] | undefined;
+  refreshBooks: () => Promise<void>;
 }

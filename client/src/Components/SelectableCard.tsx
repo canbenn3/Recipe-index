@@ -21,12 +21,15 @@ export function SelectableCard({
   }
   return (
     <div className={className} onClick={handleClick}>
-      <img src={image} alt="No image" className="thumbnail"></img>
+      <div className="thumbnail-container">
+        <img src={image} alt="No image" className="thumbnail"></img>
+      </div>
       <span>
         <input
           className="recipe-checkbox"
           checked={highlighted}
           type="checkbox"
+          onChange={() => {}} // Prevents warning about uncontrolled checkbox
         />
         {recipe.name}
       </span>

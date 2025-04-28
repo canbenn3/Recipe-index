@@ -3,10 +3,11 @@ import { StepInput } from "./StepInput";
 import { IngredientInput } from "./IngredientInput";
 import { ImageDisplay } from "./ImageDisplay";
 import { useApi } from "../Hooks/useApi";
+import { useNavigate } from "react-router";
 
 export function UploadForm() {
-
   const api = useApi();
+  const nav = useNavigate();
 
   const [steps, setSteps] = useState<string[]>([""]);
   const [ingredients, setIngredients] = useState<string[]>([""]);
@@ -48,7 +49,7 @@ export function UploadForm() {
     };
   }
 
-  function submitForm() {
+  async function submitForm() {
     if (!name || !steps.length || !ingredients.length) {
       alert("Please fill in all required fields.");
       return;
@@ -57,11 +58,11 @@ export function UploadForm() {
     let compiledSteps: { [key: string]: string } = {};
     let compiledIngredients: { [key: string]: string } = {};
     steps.forEach((step, index) => {
-      compiledSteps[`${index + 1}`] = step 
-    })
+      compiledSteps[`${index + 1}`] = step;
+    });
     ingredients.forEach((ingredient, index) => {
-      compiledIngredients[`${index + 1 }`] = ingredient.trim()
-    })
+      compiledIngredients[`${index + 1}`] = ingredient.trim();
+    });
 
     const submittedRecipe = {
       name: name.trim(),
@@ -69,8 +70,11 @@ export function UploadForm() {
       ingredients: compiledIngredients,
       steps: compiledSteps,
       image: image,
+    };
+    const response = await api.uploadRecipe(submittedRecipe);
+    if (response.status === 201) {
+      nav("/profile");
     }
-    api.uploadRecipe(submittedRecipe)
   }
 
   return (

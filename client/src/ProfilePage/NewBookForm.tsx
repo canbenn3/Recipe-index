@@ -1,20 +1,46 @@
 import { useState } from "react";
 import { recipe } from "../types/types";
 import { SelectableCard } from "../Components/SelectableCard";
+import { useApi } from "../Hooks/useApi";
 
 interface NewBookFormProps {
   recipes: recipe[];
+  postSubmit: () => void;
 }
 
-export function NewBookForm({ recipes }: NewBookFormProps) {
+export function NewBookForm({ recipes, postSubmit }: NewBookFormProps) {
   const [bookName, setBookName] = useState("");
   const [description, setDescription] = useState("");
-  const [selectedRecipes, setSelectedRecipes] = useState<Set<recipe>>(
+  const [uploadError, setUploadError] = useState(false);
+  const [selectedRecipes, setSelectedRecipes] = useState<Set<number>>(
     new Set()
   );
+  const api = useApi();
+
+  const handleSubmit = async () => {
+    console.log("Book Name:", bookName);
+    console.log("Description:", description);
+    console.log("Selected Recipes:", Array.from(selectedRecipes));
+    const response = await api.createRecipeBook({
+      name: bookName,
+      description: description,
+      recipes: Array.from(selectedRecipes),
+    });
+    if (response.status !== 201) {
+      setUploadError(true);
+      return;
+    }
+    postSubmit();
+    return;
+  };
 
   return (
     <div className="new-book-form">
+      {uploadError && (
+        <div className="error">
+          There was an error creating your recipe book
+        </div>
+      )}
       <label>
         Book Name:
         <input
@@ -41,17 +67,17 @@ export function NewBookForm({ recipes }: NewBookFormProps) {
           const handleClick = () => {
             setSelectedRecipes((prev) => {
               const newSet = new Set(prev);
-              if (prev?.has(recipe)) {
-                newSet.delete(recipe);
+              if (prev?.has(recipe.id)) {
+                newSet.delete(recipe.id);
                 return newSet;
               } else {
-                newSet?.add(recipe);
+                newSet?.add(recipe.id);
                 return newSet;
               }
             });
           };
 
-          const highlighted = selectedRecipes.has(recipe);
+          const highlighted = selectedRecipes.has(recipe.id);
 
           return (
             <SelectableCard
@@ -64,7 +90,7 @@ export function NewBookForm({ recipes }: NewBookFormProps) {
         })}
       </div>
 
-      <button>Create your recipe book!</button>
+      <button onClick={handleSubmit}>Create your recipe book!</button>
     </div>
   );
 }

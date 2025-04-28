@@ -124,6 +124,10 @@ main {
   transition: all 0.3s ease;
 }
 
+.actions.horizontal {
+  flex-direction: row;;
+}
+
 .actions > .icon:hover {
   border-radius: 50%;
   transform: scale(1.2);
@@ -311,16 +315,12 @@ button:active {
   width: 50%;
   height: 70%;
   background-color: var(--contrast);
+  color: var(--primary-dark);
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   transition: opacity 0.3s ease;
-}
-
-.modal.fade-in {
-  display: block;
-  opacity: 1;
 }
 
 .new-book-form {
@@ -351,4 +351,38 @@ button:active {
   scrollbar-width: thin; 
   scrollbar-color: var(--primary-dark) var(--contrast);
   height: 325px;
+}
+
+.select-many > .recipe-card {
+  background-color: var(--primary);
+}
+
+.select-many > .recipe-card.highlighted {
+  background-color: var(--primary-light);
+}
+
+.book-tab {
+  display: flex;
+  height: 50px;
+  background-color: var(--contrast);
+  color: var(--primary-dark);
+  padding: .5rem;
+  border-radius: 5px;
+  align-items: center;
+  box-shadow: 5px 5px 5px rgba(0,0,0,.25);
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+.book-tab:hover {
+  cursor: pointer;
+  height: 60px;
+}
+
+.book-tab > .thumbnail-container {
+  height: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.book-display .recipe-card {
+  background-color: var(--primary);
 }

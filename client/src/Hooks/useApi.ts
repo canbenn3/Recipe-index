@@ -1,4 +1,4 @@
-import { recipe, uploadApiProps } from "../types/types";
+import { recipe, recipeBookUpload, uploadApiProps } from "../types/types";
 
 const getCSRFToken = () => {
   const csrfToken = document.cookie
@@ -30,6 +30,7 @@ export const useApi = () => ({
       },
       body: formData,
     });
+    return response.json();
   },
 
   getHomeRecipes: async (page: number) => {
@@ -58,4 +59,52 @@ export const useApi = () => ({
     const response = await fetch("/api/get_recipes/");
     return response.json();
   },
+
+  deleteRecipe: async (recipeId: number) => {
+    const csrfToken = getCSRFToken();
+    const response = await fetch(`api/delete_recipe/`, {
+      method: "DELETE",
+      headers: {
+        "X-CSRFToken": csrfToken || "",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        recipeId: recipeId,
+      }),
+    });
+    return response.json();
+  },
+
+  createRecipeBook: async (book: recipeBookUpload) => {
+    const csrfToken = getCSRFToken();
+    const response = await fetch("/api/create_recipe_book/", {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": csrfToken || "",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "name": book.name,
+        "description": book.description,
+        "recipe_ids": book.recipes,
+      })
+    })
+    return response.json();
+  },
+
+  deleteRecipeBook: async (recipeBookId: number) => {
+    const csrfToken = getCSRFToken();
+    const response = await fetch(`api/delete_recipe_book/`, {
+      method: "DELETE",
+      headers: {
+        "X-CSRFToken": csrfToken || "",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "recipe_book_id": recipeBookId,
+      }),
+    });
+    return response.json();
+  }
+
 });
