@@ -8,10 +8,10 @@ import { SelectableCard } from "../Components/SelectableCard";
 
 interface BookDisplayProps {
   recipeBook: recipeBook | null;
-  postDelete: () => void;
+  postChange: () => void;
 }
 
-export function BookDisplay({ recipeBook, postDelete }: BookDisplayProps) {
+export function BookDisplay({ recipeBook, postChange }: BookDisplayProps) {
   if (!recipeBook) {
     return;
   }
@@ -30,7 +30,6 @@ export function BookDisplay({ recipeBook, postDelete }: BookDisplayProps) {
     new Set()
   );
   const api = useApi();
-  const nav = useNavigate();
 
   const onDelete = async () => {
     if (!recipeBook) {
@@ -41,7 +40,7 @@ export function BookDisplay({ recipeBook, postDelete }: BookDisplayProps) {
       setDeleteError(true);
       return;
     }
-    postDelete();
+    postChange();
   };
 
   return (

@@ -7,22 +7,13 @@ import { BookTab } from "../Components/BookTab";
 import { BookDisplay } from "./BookDisplay";
 
 interface BooksProps {
-  recipes: recipe[];
+  books: recipeBook[];
+  postChange: () => void;
 }
 
-export function Books({ recipes }: BooksProps) {
-  const [books, setBooks] = useState<recipeBook[]>();
+export function Books({ books, postChange }: BooksProps) {
   const [selectedBook, setSelectedBook] = useState<recipeBook | null>(null);
   const [showModal, setShowModal] = useState(false);
-  const api = useApi();
-
-  useEffect(() => {
-    async function populateBooks() {
-      const books = await api.getRecipeBooks();
-      setBooks(books.data);
-    }
-    populateBooks();
-  }, [showModal]);
 
   const handleClick = (book: recipeBook) => {
     setSelectedBook(book);
@@ -48,7 +39,10 @@ export function Books({ recipes }: BooksProps) {
       <Modal show={showModal} closeModal={() => setShowModal(false)}>
         <BookDisplay
           recipeBook={selectedBook}
-          postDelete={() => setShowModal(false)}
+          postChange={() => {
+            setShowModal(false);
+            postChange();
+          }}
         />
       </Modal>
     </div>
