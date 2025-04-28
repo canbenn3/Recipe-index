@@ -84,11 +84,11 @@ export const useApi = () => ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "name": book.name,
-        "description": book.description,
-        "recipe_ids": book.recipes,
-      })
-    })
+        name: book.name,
+        description: book.description,
+        recipe_ids: book.recipes,
+      }),
+    });
     return response.json();
   },
 
@@ -101,10 +101,24 @@ export const useApi = () => ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "recipe_book_id": recipeBookId,
+        recipe_book_id: recipeBookId,
       }),
     });
     return response.json();
-  }
+  },
 
+  editRecipeBook: async (book: recipeBookUpload) => {
+    const csrfToken = getCSRFToken();
+    const response = await fetch(`/api/edit_recipe_book/`, {
+      method: "PUT",
+      headers: {
+        "X-CSRFToken": csrfToken || "",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        recipe_book: book,
+      }),
+    });
+    return response.json();
+  },
 });

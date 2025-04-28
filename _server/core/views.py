@@ -194,3 +194,20 @@ def delete_recipe_book(req):
         return JsonResponse({"error": "No recipe book found", "status": 404}, status=404)
     book.delete()
     return JsonResponse({"message": "Recipe book deleted successfully", "status": 200}, status=200)
+
+@login_required
+def edit_recipe_book(req):
+    book = json.loads(req.body).get("recipe_book", False)
+    if not book:
+        return JsonResponse({"error": "No recipe book found", "status": 404}, status=404)
+    book_obj = Recipe_Book.objects.filter(id=book.get("id")).first()
+    if not book_obj:
+        return JsonResponse({"error": "No recipe book found", "status": 404}, status=404)
+    book_obj.name = book.get("name", book_obj.name)
+    book_obj.description = book.get("description", book_obj.description)
+    recipe_ids = book.get("recipes", [])
+    if recipe_ids:
+        recipes = Recipe.objects.filter(id__in=recipe_ids)
+        book_obj.recipes.set(recipes)
+    book_obj.save()
+    return JsonResponse({"message": "Recipe book updated successfully", "status": 200}, status=200)

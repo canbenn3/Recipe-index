@@ -39,6 +39,19 @@ export function BookDisplay({
     postChange();
   };
 
+  const onSave = async () => {
+    console.log("saving recipe book!");
+    const response = await api.editRecipeBook({
+      ...recipeBook,
+      recipes: Array.from(selectedRecipes),
+    });
+    if (response.status !== 200) {
+      console.error("Error saving recipe book");
+    }
+    postChange();
+    setEditMode(false);
+  };
+
   return (
     <>
       {deleteError && (
@@ -88,7 +101,7 @@ export function BookDisplay({
                 })}
           </div>
         )}
-        {editMode && <button>Save Changes</button>}
+        {editMode && <button onClick={onSave}>Save Changes</button>}
       </div>
     </>
   );

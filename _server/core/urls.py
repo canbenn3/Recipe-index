@@ -12,4 +12,5 @@ urlpatterns = [
     path('api/delete_recipe/', view=views.delete_recipe, name='delete_recipe'),
     path('api/create_recipe_book/', view=views.create_recipe_book, name='create_recipe_book'),
     path('api/delete_recipe_book/', view=views.delete_recipe_book, name='delete_recipe_book'),
+    path('api/edit_recipe_book/', view=views.edit_recipe_book, name='edit_recipe_book'),
 ]
