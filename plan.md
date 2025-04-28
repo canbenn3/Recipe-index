@@ -27,6 +27,12 @@ It'd be nice to have the following features, but not required:
     - Lists all ingredients and steps for the recipe.
     - Has a link to any recipe books it may be a part of.
 
+## Next Steps:
+- [ ] Revamp the upload recipe tab
+- [ ] Need a way to update a recipe!
+- [ ] Finish creating a recipe book
+  - Need a display for it as well.
+
 ## Models
 ### Recipe
 - Recipe books :    many to many

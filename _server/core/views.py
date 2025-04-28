@@ -32,12 +32,45 @@ def index(req):
 @login_required
 def get_own_recipe_books(req):
     user = req.user
-    books = Recipe_Book.objects.filter(user=user)
+    books = Recipe_Book.objects.filter(user=user).prefetch_related('recipes')
     response = {
-        "data": list(books)
+        "data": [{
+            "id": book.id,
+            "name": book.name,
+            "description": book.description,
+            "recipes": list(book.recipes.values()),
+        } for book in books]
     }
     return JsonResponse(response)
 
+
+@login_required
+def create_recipe_book(req):
+    user = req.user
+    body = json.loads(req.body)
+    name = body.get("name", False)
+    if not name:
+        return JsonResponse({
+            "error": "Name is required.",
+            "status": 400,
+            }, status=400)
+    description = body.get('description', '')
+    recipe_ids = body.get('recipe_ids', [])
+    new_book = Recipe_Book.objects.create(
+        user=user,
+        name=name,
+        description=description
+    )
+
+    recipes = Recipe.objects.filter(id__in=recipe_ids)
+    new_book.recipes.set(recipes)
+    return JsonResponse({
+        "message": "Recipe book created successfully!",
+        "book_id": new_book.id,
+        "status": 201
+    }, status=201
+    )
+    
 
 @login_required
 def upload_recipe(req):
@@ -62,7 +95,8 @@ def upload_recipe(req):
         )
         upload.save()
         return JsonResponse({
-            "message": "Recipe uploaded successfully!"
+            "message": "Recipe uploaded successfully!",
+            "status": 201,
         }, status=201
         )
     except Exception as e:
@@ -76,7 +110,7 @@ def get_recipes(req):
     book = req.GET.get("book", False)
     user = req.user
     if book:
-        recipe_book = Recipe_Book.filter(user=user,name=book)
+        recipe_book = Recipe_Book.objects.filter(user=user,name=book)
         recipes = Recipe.objects.filter(user=user,recipe_books=recipe_book)
     else:
         recipes = Recipe.objects.filter(user=user)
@@ -132,4 +166,31 @@ def get_recipe(req, id):
     recipe_dict = model_to_dict(recipe)
     if recipe.image:
         recipe_dict['image'] = recipe.image.url  # Convert ImageFieldFile to URL
+    else:
+        recipe_dict['image'] = None
     return JsonResponse(recipe_dict)
+
+
+@login_required
+def delete_recipe(req):
+    recipe_id = json.loads(req.body).get("recipeId", False)
+    if not recipe_id:
+        return JsonResponse({"error": "No recipe found", "status": 404}, status=404)
+    recipe = Recipe.objects.filter(id=recipe_id).first()
+    if not recipe:
+        return JsonResponse({"error": "No recipe found", "status": 404}, status=404)
+    if recipe.user != req.user:
+        return JsonResponse({"error": "You are not authorized to delete this recipe", "status": 401}, status=403)
+    recipe.delete()
+    return JsonResponse({"message": "Recipe deleted successfully", "status": 200}, status=200)
+
+@login_required
+def delete_recipe_book(req):
+    book_id = json.loads(req.body).get("recipe_book_id", False)
+    if not book_id:
+        return JsonResponse({"error": "No recipe book found", "status": 404}, status=404)
+    book = Recipe_Book.objects.filter(id=book_id).first()
+    if not book_id:
+        return JsonResponse({"error": "No recipe book found", "status": 404}, status=404)
+    book.delete()
+    return JsonResponse({"message": "Recipe book deleted successfully", "status": 200}, status=200)
