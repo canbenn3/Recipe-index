@@ -68,7 +68,7 @@ export function BookDisplay({
       <div className="book-display">
         <h1>{recipeBook.name}</h1>
         <p>{recipeBook.description}</p>
-        {recipeBook.recipes.length === 0 ? (
+        {recipeBook.recipes.length === 0 && !editMode ? (
           <div>
             Looks like you don't have any recipes in here! Click on the edit
             icon to get started.

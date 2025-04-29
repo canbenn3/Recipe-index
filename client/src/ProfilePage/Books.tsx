@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { recipe, recipeBook } from "../types/types";
-import { useApi } from "../Hooks/useApi";
 import { Modal } from "../Components/Modal";
-import { NewBookForm } from "./NewBookForm";
 import { BookTab } from "../Components/BookTab";
 import { BookDisplay } from "./BookDisplay";
 
@@ -31,6 +29,7 @@ export function Books({ books, postChange, allRecipes }: BooksProps) {
               key={book.id}
               recipeBook={book}
               onClick={() => handleClick(book)}
+              isDark={index % 2 === 0}
             ></BookTab>
           );
         })

@@ -16,11 +16,14 @@ export function NewBookForm({ recipes, postSubmit }: NewBookFormProps) {
     new Set()
   );
   const api = useApi();
+  const resetState = () => {
+    setBookName("");
+    setDescription("");
+    setSelectedRecipes(new Set());
+    setUploadError(false);
+  }
 
   const handleSubmit = async () => {
-    console.log("Book Name:", bookName);
-    console.log("Description:", description);
-    console.log("Selected Recipes:", Array.from(selectedRecipes));
     const response = await api.createRecipeBook({
       name: bookName,
       description: description,
@@ -30,6 +33,7 @@ export function NewBookForm({ recipes, postSubmit }: NewBookFormProps) {
       setUploadError(true);
       return;
     }
+    resetState();
     postSubmit();
     return;
   };
