@@ -1,171 +1,108 @@
-import React, { useState } from "react";
-import { StepInput } from "./StepInput";
-import { IngredientInput } from "./IngredientInput";
-import { ImageDisplay } from "./ImageDisplay";
-import { useApi } from "../Hooks/useApi";
+import { useState } from "react";
 import { useNavigate } from "react-router";
+import { recipe } from "../types/types";
+import { useApi } from "../Hooks/useApi";
+import { Input } from "../Components/Input";
+import { ListInput } from "../Components/ListInput";
+import { ImageDisplay } from "./ImageDisplay";
 
-export function UploadForm() {
-  const api = useApi();
-  const nav = useNavigate();
+interface UploadRecipeProps {
+  recipe?: recipe | null;
+}
 
-  const [steps, setSteps] = useState<string[]>([""]);
-  const [ingredients, setIngredients] = useState<string[]>([""]);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+export function UploadForm({ recipe }: UploadRecipeProps) {
+  const [name, setName] = useState(recipe?.name || "");
+  const [description, setDescription] = useState(recipe?.overview || "");
+  const [ingredients, setIngredients] = useState<Record<string, string>>(
+    recipe?.ingredients || { "1": "" }
+  );
+  const [steps, setSteps] = useState<Record<string, string>>(
+    recipe?.steps || { "1": "" }
+  );
   const [image, setImage] = useState<File | null>(null);
+  const nav = useNavigate();
+  const api = useApi();
 
-  function addStep() {
-    setSteps((prevSteps) => {
-      const newSteps = [...prevSteps, ""];
-      return newSteps;
-    });
-  }
-
-  function setStep(index: number) {
-    return (value: string) => {
-      setSteps((prevSteps) => {
-        const newSteps = [...prevSteps];
-        newSteps[index] = value;
-        return newSteps;
-      });
-    };
-  }
-
-  function addIngredient() {
-    setIngredients((prev) => {
-      const newIngredients = [...prev, ""];
-      return newIngredients;
-    });
-  }
-
-  function setIngredient(index: number) {
-    return (value: string) => {
-      setIngredients((prev) => {
-        const newIngredients = [...prev];
-        newIngredients[index] = value;
-        return newIngredients;
-      });
-    };
-  }
-
-  async function submitForm() {
-    if (!name || !steps.length || !ingredients.length) {
+  const submitForm = async () => {
+    if (
+      !name ||
+      Object.keys(steps).length === 0 ||
+      Object.keys(ingredients).length === 0
+    ) {
       alert("Please fill in all required fields.");
       return;
     }
-    // Compile into a json format
-    let compiledSteps: { [key: string]: string } = {};
-    let compiledIngredients: { [key: string]: string } = {};
-    steps.forEach((step, index) => {
-      compiledSteps[`${index + 1}`] = step;
-    });
-    ingredients.forEach((ingredient, index) => {
-      compiledIngredients[`${index + 1}`] = ingredient.trim();
-    });
-
     const submittedRecipe = {
       name: name.trim(),
       description: description.trim(),
-      ingredients: compiledIngredients,
-      steps: compiledSteps,
+      ingredients: ingredients,
+      steps: steps,
       image: image,
     };
     const response = await api.uploadRecipe(submittedRecipe);
     if (response.status === 201) {
       nav("/profile");
     }
-  }
+  };
 
   return (
-    <div className="upload-form">
-      <h2>Upload a new Recipe </h2>
+    <>
+      <div className="recipe-page">
+        <div className="recipe printable">
+          <span className="recipe-header">
+            <h1>
+              <Input
+                input={name}
+                setInput={setName}
+                instruction="Title of your Recipe"
+              />
+            </h1>
+            <div>
+              {recipe && !image ? (
+                <img src={recipe?.image} alt="No image selected" />
+              ) : (
+                <ImageDisplay image={image} />
+              )}
+              <input
+                name="image"
+                type="file"
+                onChange={(e) => {
+                  setImage(e.target.files ? e.target.files[0] : null);
+                }}
+              />
+            </div>
+          </span>
+          <span className="hline"></span>
 
-      <label>
-        Name*
-        <input
-          name="name"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-
-      <label>
-        Description
-        <input
-          name="description"
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </label>
-
-      <label>
-        Steps*
-        <div className="steps-container">
-          {steps.map((step, index) => (
-            <StepInput
-              step={step}
-              setStep={setStep(index)}
-              stepNum={index + 1}
-              key={index + 1}
+          <>
+            <h2>Overview:</h2>
+            <Input
+              input={description}
+              setInput={setDescription}
+              instruction="Type a short overview (optional)"
             />
-          ))}
+          </>
+          <div className="recipe-columns">
+            <div>
+              <h2>INGREDIENTS -</h2>
+              <ListInput
+                input={ingredients}
+                setInput={setIngredients}
+                instruction="Add ingredients here"
+              />
+            </div>
+            <div>
+              <h2>STEPS - </h2>
+              <ListInput
+                input={steps}
+                setInput={setSteps}
+                instruction="List the steps for your recipe."
+              />
+            </div>
+          </div>
+          <button onClick={submitForm}>Save Recipe</button>
         </div>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            addStep();
-          }}
-        >
-          Add Step
-        </button>
-      </label>
-
-      <label>
-        ingredients*
-        <div className="ingredients-container">
-          {ingredients.map((ingredient, index) => (
-            <IngredientInput
-              ingredient={ingredient}
-              ingredientNum={index + 1}
-              setIngredient={setIngredient(index)}
-              key={index + 1}
-            />
-          ))}
-        </div>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            addIngredient();
-          }}
-        >
-          Add Ingredient
-        </button>
-      </label>
-
-      <label>
-        Image
-        <input
-          name="image"
-          type="file"
-          onChange={(e) => {
-            setImage(e.target.files ? e.target.files[0] : null);
-          }}
-        />
-      </label>
-      <ImageDisplay image={image ? image : null} />
-
-      <button
-        type="submit"
-        onClick={(e) => {
-          e.preventDefault();
-          submitForm();
-        }}
-      >
-        Submit Recipe
-      </button>
-    </div>
+      </div>
+    </>
   );
 }

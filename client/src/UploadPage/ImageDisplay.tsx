@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 
 export function ImageDisplay({ image }: { image: File | null }) {
   const [styling, setStyling] = useState<CSSProperties>({
@@ -20,8 +20,6 @@ export function ImageDisplay({ image }: { image: File | null }) {
     }
   }, [image]);
   return (
-    <div className="image-container">
       <div style={styling} className="image-display" />
-    </div>
   );
 }

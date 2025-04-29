@@ -245,16 +245,9 @@ label {
   width: 100%;
 }
 
-.image-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 .image-display {
-  width: 50%;
-  max-width: 300px;
-  aspect-ratio: 1 / 1;
+  width: 3in;
+  height: 2in;
   border: 2px dashed var(--primary-dark);
 }
 
