@@ -1,5 +1,9 @@
-import { recipeCardProps } from "../types/types";
 import { useNavigate } from "react-router";
+import { recipe } from "../types/types";
+
+interface recipeCardProps {
+  recipe: recipe;
+}
 
 export function RecipeCard({ recipe }: recipeCardProps) {
   const nav = useNavigate();

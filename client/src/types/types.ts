@@ -1,24 +1,3 @@
-export type recipeTab = {
-  name: string;
-  rating: number;
-};
-
-export type recipeCardProps = {
-  recipe: recipe;
-};
-
-export type stepInputProps = {
-  step: string;
-  stepNum: number;
-  setStep: (value: string) => void;
-};
-
-export type ingredientInputProps = {
-  ingredient: string;
-  ingredientNum: number;
-  setIngredient: (value: string) => void;
-};
-
 export type uploadApiProps = {
   name: string;
   description: string | null;
@@ -58,8 +37,3 @@ export type recipeBookUpload = {
   description: string;
   recipes: number[];
 };
-
-export interface BooksContextType {
-  books: recipeBook[] | undefined;
-  refreshBooks: () => Promise<void>;
-}
