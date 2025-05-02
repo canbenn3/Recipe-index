@@ -5,7 +5,7 @@ export function Recipe({recipe}: {recipe: recipe | null}) {
     <div className="recipe printable">
       <span className="recipe-header">
         <h1>{recipe?.name.toUpperCase()}</h1>
-        <img src={recipe?.image} alt="Nothing" />
+        {recipe?.image && <img src={recipe?.image} alt="Error displaying image" />}
       </span>
       <span className="hline"></span>
 

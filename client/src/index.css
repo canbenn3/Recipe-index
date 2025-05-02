@@ -55,6 +55,30 @@ main {
   justify-content: center;
 }
 
+textarea {
+  resize: none;
+  font-size: inherit;
+  font-family: 'Fraunces';
+  font-weight: inherit;
+  width: 100%;
+
+}
+
+h1 > textarea {
+  text-align: center;
+}
+
+/* ol, ul {
+  list-style-position: inside;
+} */
+
+li {
+  /* display: flex; */
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
 .central-content {
   display: flex;
   background-color: var(--tertiary);
@@ -175,6 +199,10 @@ main {
 
 .ingredients-list {
   width: 2.5in
+}
+
+.steps-list {
+  width: 4in;
 }
 
 label {

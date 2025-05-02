@@ -52,13 +52,13 @@ export function UploadForm({ recipe }: UploadRecipeProps) {
         <span className="recipe-header">
           <h1>
             <Input
-              input={name}
+              input={name.toUpperCase()}
               setInput={setName}
               instruction="Title of your Recipe"
             />
           </h1>
           <div className="img-container">
-            {recipe && !image ? (
+            {recipe?.image && !image ? (
               <img src={recipe?.image} alt="No image selected" />
             ) : (
               <ImageDisplay image={image} />
@@ -86,6 +86,7 @@ export function UploadForm({ recipe }: UploadRecipeProps) {
           <div>
             <h2>INGREDIENTS -</h2>
             <ListInput
+              className="ingredients-list"
               input={ingredients}
               setInput={setIngredients}
               instruction="Add ingredients here"
@@ -94,9 +95,11 @@ export function UploadForm({ recipe }: UploadRecipeProps) {
           <div>
             <h2>STEPS - </h2>
             <ListInput
+              className="steps-list"
               input={steps}
               setInput={setSteps}
               instruction="List the steps for your recipe."
+              ordered
             />
           </div>
         </div>

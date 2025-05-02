@@ -97,7 +97,8 @@ def upload_recipe(req):
         upload.ingredients = ingredients
         upload.steps = steps
         upload.overview = overview
-        upload.image = image
+        if image:
+            upload.image = image
         upload.save()
         return JsonResponse({
             "message": "Recipe uploaded successfully!",
