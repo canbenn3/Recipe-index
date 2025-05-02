@@ -1,4 +1,5 @@
 export type uploadApiProps = {
+  id?: number;
   name: string;
   description: string | null;
   steps: {};

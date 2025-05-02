@@ -11,6 +11,7 @@ const getCSRFToken = () => {
 export const useApi = () => ({
   uploadRecipe: async (recipe: uploadApiProps) => {
     const formData = new FormData();
+    formData.append("id", recipe.id ? recipe.id.toString() : "");
     formData.append("name", recipe.name);
     formData.append("steps", JSON.stringify(recipe.steps));
     formData.append("ingredients", JSON.stringify(recipe.ingredients));

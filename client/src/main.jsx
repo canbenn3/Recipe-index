@@ -6,7 +6,7 @@ import 'vite/modulepreload-polyfill'
 import { createHashRouter, RouterProvider } from 'react-router'
 import { Home } from './HomePage/Home.tsx'
 import { UploadForm } from './UploadPage/UploadForm.tsx'
-import { Recipe } from './RecipePage/Recipe.tsx'
+import { RecipePage } from './RecipePage/RecipePage.tsx'
 import {Profile} from './ProfilePage/Profile.tsx'
 
 const router = createHashRouter([
@@ -15,7 +15,7 @@ const router = createHashRouter([
      children: [
         {path: "", element: <Home />},
         {path: "upload", element: <UploadForm /> },
-        {path: "recipe/:id", element: <Recipe />},
+        {path: "recipe/:id", element: <RecipePage />},
         {path: "profile", element: <Profile />}
     ]},
   ]);

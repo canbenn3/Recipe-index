@@ -85,14 +85,19 @@ def upload_recipe(req):
             return JsonResponse({
                 "error": "Name, ingredients, and steps are required.",
                 }, status=400)
-        upload = Recipe(
-            user=user,
-            name=name,
-            ingredients=ingredients,
-            steps=steps,
-            overview=overview,
-            image=image
-        )
+        id = req.POST.get('id', False)
+        if id:
+            upload = Recipe.objects.get(id=id)
+            if upload.user != req.user:
+                raise PermissionError("You don't have permission to edit this object!")
+        else:
+            upload = Recipe.objects.create()
+        upload.user = user
+        upload.name = name
+        upload.ingredients = ingredients
+        upload.steps = steps
+        upload.overview = overview
+        upload.image = image
         upload.save()
         return JsonResponse({
             "message": "Recipe uploaded successfully!",
@@ -102,6 +107,7 @@ def upload_recipe(req):
     except Exception as e:
         return JsonResponse({
             "error": str(e),
+            "status": 500,
         }, status=500
         )
 

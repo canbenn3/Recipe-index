@@ -33,6 +33,7 @@ export function UploadForm({ recipe }: UploadRecipeProps) {
       return;
     }
     const submittedRecipe = {
+      id: recipe?.id,
       name: name.trim(),
       description: description.trim(),
       ingredients: ingredients,
@@ -47,61 +48,59 @@ export function UploadForm({ recipe }: UploadRecipeProps) {
 
   return (
     <>
-      <div className="recipe-page">
-        <div className="recipe printable">
-          <span className="recipe-header">
-            <h1>
-              <Input
-                input={name}
-                setInput={setName}
-                instruction="Title of your Recipe"
-              />
-            </h1>
-            <div>
-              {recipe && !image ? (
-                <img src={recipe?.image} alt="No image selected" />
-              ) : (
-                <ImageDisplay image={image} />
-              )}
-              <input
-                name="image"
-                type="file"
-                onChange={(e) => {
-                  setImage(e.target.files ? e.target.files[0] : null);
-                }}
-              />
-            </div>
-          </span>
-          <span className="hline"></span>
-
-          <>
-            <h2>Overview:</h2>
+      <div className="recipe printable">
+        <span className="recipe-header">
+          <h1>
             <Input
-              input={description}
-              setInput={setDescription}
-              instruction="Type a short overview (optional)"
+              input={name}
+              setInput={setName}
+              instruction="Title of your Recipe"
             />
-          </>
-          <div className="recipe-columns">
-            <div>
-              <h2>INGREDIENTS -</h2>
-              <ListInput
-                input={ingredients}
-                setInput={setIngredients}
-                instruction="Add ingredients here"
-              />
-            </div>
-            <div>
-              <h2>STEPS - </h2>
-              <ListInput
-                input={steps}
-                setInput={setSteps}
-                instruction="List the steps for your recipe."
-              />
-            </div>
+          </h1>
+          <div className="img-container">
+            {recipe && !image ? (
+              <img src={recipe?.image} alt="No image selected" />
+            ) : (
+              <ImageDisplay image={image} />
+            )}
+            <input
+              name="image"
+              type="file"
+              onChange={(e) => {
+                setImage(e.target.files ? e.target.files[0] : null);
+              }}
+            />
           </div>
-          <button onClick={submitForm}>Save Recipe</button>
+        </span>
+        <span className="hline"></span>
+
+        <>
+          <h2>Overview:</h2>
+          <Input
+            input={description}
+            setInput={setDescription}
+            instruction="Type a short overview (optional)"
+          />
+        </>
+        <div className="recipe-columns">
+          <div>
+            <h2>INGREDIENTS -</h2>
+            <ListInput
+              input={ingredients}
+              setInput={setIngredients}
+              instruction="Add ingredients here"
+            />
+          </div>
+          <div>
+            <h2>STEPS - </h2>
+            <ListInput
+              input={steps}
+              setInput={setSteps}
+              instruction="List the steps for your recipe."
+            />
+          </div>
         </div>
+        <button onClick={submitForm}>Save Recipe</button>
       </div>
     </>
   );

@@ -1,28 +1,34 @@
-# 2610 Django + Vite Starting Point
-This project serves as a starting point you to use as a starting point for Django applications that use Vite as the asset server for development. You are welcome to us this project for all of your assignments beginning with Module 5.
+# Recipe Index
 
-## Strategy
-This application is a hybrid MPA and SPA. It reuses all of the login stuff that we did at the end of module 3 - there is a separate page for signup/signin. Once a user is logged in they are redirected to the / view which then renders the SPA application created using React and Vite.
+### A way to view recipes without interrupting ads or reading a biography.
 
-## Creating a new application
-1. Clone the repo `git clone git@github.com:dittonjs/2610DjangoViteStarter.git <your-new-project-name>`. Replace `<your-new-project-name>` with the name you want give to your project.
-   - If you are using GitHub for version control, a better option would be to fork the repository instead of clone it.
-3. Open the pyproject.toml file and change the `name` property. You should use `-` to separate words in your name for this property.
-4. This project was set up using Python 3.11. You might have an older version installed. If you run into an error later that says that your activated Python version isn't compatible, the in the pyproject.toml file, just change the version there to match the version that you have installed. If you do this, you need to make sure that the lock file gets regenerated. You can do this by running `poetry lock --no-update` or by simply deleting the poetry.lock file (it will get regenerated when you run poetry install)/
+## About
 
-## Initial Setup
-1. Change the name property in the `pyproject.toml` file to be something unique to your project.
-1. In the root directory, install the python dependencies `poetry install`
-2. In the `client` directory, install the javascript dependencies `npm install`
-3. In the `_server` directory, create a new file called `.env`
-4. Copy the contents of `_server/.env.example` into the newly created `.env` file.
-5. Activate the poetry env `poetry shell`
-6. In the `_server` directory, run the migrations `python manage.py migrate`
+Recipe Index is a way users can view, upload, and share recipes that they enjoy! It's as simple as that! Upload your recipes as part of a recipe book or individually, create a brand new empty recipe book or fill it with recipes you already indexed! Print individual recipes or entire books in the same format so that you don't need to rely on greasy index cards written in a thousand different formats. All of these features are rolled into one using Recipe Index.
 
-## Running the appliction
-1. In the `client` directory run `npm run dev`
-2. In the `_server` directory (with your poetry env activated) run `python manage.py runserver`
-3. Visit your application at `http://localhost:8000`
+## Features
 
-## Using this project for future classes/personal projects
-Many students in the past have chosen to use this starter app template for projects in other classes like CS3450 and for personal projects. I strongly encourage you to do so! Please check with your other instructors before you use this project as a starting point for their classes. You may also want to add your name to the author field in the `pyproject.toml` file.
+- [x] Upload Recipes: You can upload the title, (short) overview, a picture, and the list of steps and ingredients needed to make your recipe.
+- [x] Compile and edit Recipe Books: You can build recipe books out of any and all of the recipes you've uploaded. You can always add or take away from them later! Make as many as you'd like!
+- [x] View recipes uploaded by others: Check out the home page to find inspiration for your next meal.
+- [x] Print your recipes: You can print your recipes in a beautiful format without any hassle. Just press the print icon on the side of your recipes!
+
+## Features soon to come
+
+- [ ] Recipes include the amount of time involved in making it.
+- [ ] Recipes include references to the recipe books they're included in (from author only)
+- [ ] You can edit recipes after uploading them.
+- [ ] You can save recipes from other users to your recipe books.
+- [ ] The home page is paginated
+- [ ] You can print an entire recipe book!
+- [ ] An "about" page
+- [ ] You can view another person's profile and recipe books
+- [ ] Recipes have tags that aid with searching
+- [ ] You can search for recipes
+
+## Features in the distant future...
+
+- [ ] The application is mobile friendly
+- [ ] You can rate and review recipes!
+- [ ] the homepage contains the highest reviewed recipes
+- [ ] You can view the home and about pages without logging in.

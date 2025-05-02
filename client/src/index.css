@@ -93,7 +93,7 @@ main {
   align-items: center;
 }
 
-.recipe-header > img {
+.recipe-header img {
   max-width: 3in;
   max-height: 2in;
 }
@@ -318,6 +318,12 @@ button:active {
 .book-tab > .thumbnail-container {
   height: 100%;
   aspect-ratio: 1 / 1;
+}
+
+.img-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .book-tab.dark {
