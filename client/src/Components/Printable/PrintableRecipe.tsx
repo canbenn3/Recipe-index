@@ -1,6 +1,7 @@
-import { recipe } from "../types/types";
+import { recipe } from "../../types/types";
+import "./printable.css";
 
-export function Recipe({ recipe }: { recipe: recipe | null }) {
+export function PrintableRecipe({ recipe }: { recipe: recipe | null }) {
   return (
     <div className="recipe">
       <span className="recipe-header">

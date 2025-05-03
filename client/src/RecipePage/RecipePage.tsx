@@ -5,6 +5,7 @@ import { useApi } from "../Hooks/useApi";
 import { Actions } from "../Components/Actions";
 import { UploadForm } from "../UploadPage/UploadForm";
 import { Recipe } from "./Recipe";
+import { PrintableRecipe } from "../Components/Printable/PrintableRecipe";
 
 export function RecipePage() {
   const [recipe, setRecipe] = useState<recipe | null>(null);
@@ -45,13 +46,10 @@ export function RecipePage() {
           Something went wrong while deleting the recipe. Please try again.
         </div>
       )}
-      <div className="recipe-page">
-        <Actions
-          onDelete={onDelete}
-          onEdit={() => setEditMode((old) => !old)}
-        />
-        {editMode ? <UploadForm recipe={recipe} /> : <Recipe recipe={recipe} />}
-      </div>
+      <Actions onDelete={onDelete} onEdit={() => setEditMode((old) => !old)}>
+        <PrintableRecipe recipe={recipe} />
+      </Actions>
+      {editMode ? <UploadForm recipe={recipe} /> : <Recipe recipe={recipe} />}
     </>
   );
 }

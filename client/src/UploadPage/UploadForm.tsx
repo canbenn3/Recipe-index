@@ -48,7 +48,7 @@ export function UploadForm({ recipe }: UploadRecipeProps) {
 
   return (
     <>
-      <div className="recipe printable">
+      <div className="recipe">
         <span className="recipe-header">
           <h1>
             <Input

@@ -19,7 +19,6 @@ export const useApi = () => ({
       formData.append("description", recipe.description);
     }
     if (recipe.image) {
-      console.log("There is an image!", recipe.image);
       formData.append("image", recipe.image);
     }
 

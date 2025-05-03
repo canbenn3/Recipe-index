@@ -1,31 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
 :root {
   --primary: #466362;
-  --primary-dark: #3B5454;
+  --primary-dark: #3b5454;
   --primary-light: #709998;
   --secondary: #775253;
-  --tertiary: #FFFFFF;
-  --contrast: #A49966;
-  --darker-contrast: #80764D;
-  --border: #834F34;
-  font-family: 'Fraunces', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --tertiary: #ffffff;
+  --contrast: #a49966;
+  --darker-contrast: #80764d;
+  --border: #834f34;
+  font-family: "Fraunces", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
 }
 
 @media print {
-  body * {
+  body {
     visibility: hidden;
   }
+
   .printable {
     visibility: visible;
-    position: absolute;
-    top: 0;
-    left: 0;
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
   }
-  .printable * {
-    visibility: visible;
-  }
+}
+
+.printable {
+  display: none;
 }
 
 body {
@@ -43,11 +48,6 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-nav {
-  display: flex;
-  gap: 1rem;
-}
-
 main {
   display: flex;
   padding: 2rem;
@@ -58,10 +58,9 @@ main {
 textarea {
   resize: none;
   font-size: inherit;
-  font-family: 'Fraunces';
+  font-family: "Fraunces";
   font-weight: inherit;
   width: 100%;
-
 }
 
 h1 > textarea {
@@ -89,7 +88,7 @@ li {
   padding: 1rem;
   border: solid 2px var(--border);
   border-radius: 5px;
-  box-shadow: 10px 10px 20px rgba(0,0,0,.1);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .link {
@@ -107,7 +106,7 @@ li {
   padding: 1rem;
   border: solid 2px var(--border);
   border-radius: 5px;
-  box-shadow: 10px 10px 20px rgba(0,0,0,.1);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .recipe-header {
@@ -122,10 +121,6 @@ li {
   max-height: 2in;
 }
 
-.recipe-page {
-  display: flex;
-}
-
 .actions {
   display: flex;
   flex-direction: column;
@@ -138,7 +133,7 @@ li {
 }
 
 .actions.horizontal {
-  flex-direction: row;;
+  flex-direction: row;
 }
 
 .actions > .icon:hover {
@@ -190,15 +185,16 @@ li {
 .recipe-columns {
   display: flex;
   width: 100%;
-  gap: .5in;
+  gap: 0.5in;
 }
 
-.ingredients-list > li, .steps-list > li {
+.ingredients-list > li,
+.steps-list > li {
   font-size: 14pt;
 }
 
 .ingredients-list {
-  width: 2.5in
+  width: 2.5in;
 }
 
 .steps-list {
@@ -225,7 +221,7 @@ label {
   aspect-ratio: 1 / 1;
   color: var(--tertiary);
   border-radius: 5px;
-  box-shadow: 5px 5px 5px rgba(0,0,0,.25);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
   transition: all 0.3s ease;
 }
 
@@ -262,8 +258,8 @@ button {
   border-radius: 5px;
   border: 1px solid var(--border);
   padding: 10px 15px;
-  box-shadow: 5px 5px 5px rgba(0,0,0,.25);
-  width: 25%
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+  width: 25%;
 }
 
 button:hover {
@@ -313,7 +309,7 @@ button:active {
 
 .select-many {
   overflow-y: scroll;
-  scrollbar-width: thin; 
+  scrollbar-width: thin;
   scrollbar-color: var(--primary-dark) var(--contrast);
   height: 325px;
 }
@@ -331,10 +327,10 @@ button:active {
   height: 50px;
   background-color: var(--contrast);
   color: var(--primary-dark);
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 5px;
   align-items: center;
-  box-shadow: 5px 5px 5px rgba(0,0,0,.25);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
   gap: 20px;
   transition: all 0.3s ease;
 }
@@ -364,4 +360,50 @@ button:active {
 
 .book-display .recipe-card.highlighted {
   background-color: var(--primary-light);
+}
+
+.navbar {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  padding: 1rem;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.menu-btn {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  color: var(--tertiary);
+  border: none;
+  width: auto;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .menu-btn {
+    display: flex;
+  }
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    flex-direction: column;
+    background: var(--contrast);
+    padding: 0.5rem;
+    width: 200px;
+    display: none;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
 }
