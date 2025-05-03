@@ -17,7 +17,7 @@ Recipe Index is a way users can view, upload, and share recipes that they enjoy!
 
 - [ ] Recipes include the amount of time involved in making it.
 - [ ] Recipes include references to the recipe books they're included in (from author only)
-- [ ] You can edit recipes after uploading them.
+- [X] You can edit recipes after uploading them.
 - [ ] You can save recipes from other users to your recipe books.
 - [ ] The home page is paginated
 - [ ] You can print an entire recipe book!

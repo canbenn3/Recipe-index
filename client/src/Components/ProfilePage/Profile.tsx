@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Books } from "./Books";
 import { Recipes } from "./Recipes";
-import { useApi } from "../Hooks/useApi";
-import { recipe, recipeBook } from "../types/types";
-import { Modal } from "../Components/Modal";
+import { useApi } from "../../Hooks/useApi";
+import { recipe, recipeBook } from "../../types/types";
+import { Modal } from "../Modal";
 import { NewBookForm } from "./NewBookForm";
 
 export function Profile() {
@@ -38,7 +38,9 @@ export function Profile() {
         postChange={() => refreshBooks()}
         allRecipes={recipes}
       />
-      <button onClick={toggleModal}>Add a new book!</button>
+      <button className="btn-submit" onClick={toggleModal}>
+        Add a new book!
+      </button>
       <Modal show={showModal} closeModal={toggleModal}>
         <NewBookForm
           recipes={recipes}

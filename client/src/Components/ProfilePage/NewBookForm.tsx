@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { recipe } from "../types/types";
-import { SelectableCard } from "../Components/SelectableCard";
-import { useApi } from "../Hooks/useApi";
+import { recipe } from "../../types/types";
+import { SelectableCard } from "../SelectableCard";
+import { useApi } from "../../Hooks/useApi";
 
 interface NewBookFormProps {
   recipes: recipe[];
@@ -21,7 +21,7 @@ export function NewBookForm({ recipes, postSubmit }: NewBookFormProps) {
     setDescription("");
     setSelectedRecipes(new Set());
     setUploadError(false);
-  }
+  };
 
   const handleSubmit = async () => {
     const response = await api.createRecipeBook({
@@ -94,7 +94,9 @@ export function NewBookForm({ recipes, postSubmit }: NewBookFormProps) {
         })}
       </div>
 
-      <button onClick={handleSubmit}>Create your recipe book!</button>
+      <button className="btn-submit" onClick={handleSubmit}>
+        Create your recipe book!
+      </button>
     </div>
   );
 }

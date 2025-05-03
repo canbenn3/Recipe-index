@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { RecipeCard } from "../Components/RecipeCard";
-import { recipe, recipeBook } from "../types/types";
-import { Actions } from "../Components/Actions";
-import { useApi } from "../Hooks/useApi";
-import { SelectableCard } from "../Components/SelectableCard";
+import { RecipeCard } from "../RecipeCard";
+import { recipe, recipeBook } from "../../types/types";
+import { Actions } from "../Actions";
+import { useApi } from "../../Hooks/useApi";
+import { SelectableCard } from "../SelectableCard";
 
 interface BookDisplayProps {
   recipeBook: recipeBook | null;
@@ -101,7 +101,11 @@ export function BookDisplay({
                 })}
           </div>
         )}
-        {editMode && <button onClick={onSave}>Save Changes</button>}
+        {editMode && (
+          <button className="btn-submit" onClick={onSave}>
+            Save Changes
+          </button>
+        )}
       </div>
     </>
   );

@@ -67,12 +67,8 @@ h1 > textarea {
   text-align: center;
 }
 
-/* ol, ul {
-  list-style-position: inside;
-} */
 
 li {
-  /* display: flex; */
   align-items: center;
   gap: 8px;
   margin-bottom: 10px;
@@ -252,7 +248,7 @@ label {
   border: 2px dashed var(--primary-dark);
 }
 
-button {
+.btn-submit {
   background-color: var(--primary);
   color: var(--tertiary);
   border-radius: 5px;
@@ -262,13 +258,13 @@ button {
   width: 25%;
 }
 
-button:hover {
+.btn-submit:hover {
   background-color: var(--primary-dark);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-button:active {
+.btn-submit:active {
   box-shadow: none;
   transition: all 0.3s ease;
 }

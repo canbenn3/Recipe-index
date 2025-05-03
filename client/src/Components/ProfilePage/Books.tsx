@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { recipe, recipeBook } from "../types/types";
-import { Modal } from "../Components/Modal";
-import { BookTab } from "../Components/BookTab";
+import { recipe, recipeBook } from "../../types/types";
+import { Modal } from "../Modal";
+import { BookTab } from "../BookTab";
 import { BookDisplay } from "./BookDisplay";
 
 interface BooksProps {

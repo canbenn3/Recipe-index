@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { recipe } from "../types/types";
-import { useApi } from "../Hooks/useApi";
-import { Input } from "../Components/Input";
-import { ListInput } from "../Components/ListInput";
+import { recipe } from "../../types/types";
+import { useApi } from "../../Hooks/useApi";
+import { Input } from "../Input";
+import { ListInput } from "../ListInput";
 import { ImageDisplay } from "./ImageDisplay";
 
 interface UploadRecipeProps {
@@ -103,7 +103,9 @@ export function UploadForm({ recipe }: UploadRecipeProps) {
             />
           </div>
         </div>
-        <button onClick={submitForm}>Save Recipe</button>
+        <button className="btn-submit" onClick={submitForm}>
+          Save Recipe
+        </button>
       </div>
     </>
   );

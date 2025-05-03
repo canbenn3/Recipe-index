@@ -1,5 +1,5 @@
-import { recipe } from "../types/types";
-import { RecipeCard } from "../Components/RecipeCard";
+import { recipe } from "../../types/types";
+import { RecipeCard } from "../RecipeCard";
 import { useNavigate } from "react-router";
 
 export function Recipes({ recipes }: { recipes: recipe[] | undefined }) {
@@ -17,7 +17,9 @@ export function Recipes({ recipes }: { recipes: recipe[] | undefined }) {
             return <RecipeCard recipe={recipe} key={recipe.id} />;
           })}
       </div>
-      <button onClick={addNewRecipe}> Add a new recipe!</button>
+      <button className="btn-submit" onClick={addNewRecipe}>
+        Add a new recipe!
+      </button>
     </div>
   );
 }
