@@ -19,7 +19,6 @@ export function Actions({
   if (isHorizontal) {
     className += " horizontal";
   }
-  console.log(props.children);
 
   return (
     <>

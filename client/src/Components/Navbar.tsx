@@ -1,6 +1,7 @@
-import { Menu } from "lucide-react";
+import { ChefHat, HomeIcon, LogOut } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
+import { useScreenSize } from "../Context/ScreenSizeContext";
 
 async function logout() {
   const res = await fetch("/registration/logout/", {
@@ -20,27 +21,27 @@ export function Navbar() {
   const handleClick = () => {
     setMenuOpen((prev) => !prev);
   };
+  const sz = useScreenSize();
+  const iconSize = 32;
+
   return (
     <nav className="navbar">
-      <button className="menu-btn" onClick={handleClick}>
-        <Menu />
-      </button>
       <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
         <li onClick={handleClick}>
           <Link className="link" to={"/"}>
-            Home
+            {sz.isMobile ? <HomeIcon size={iconSize} /> : "Home"}
           </Link>
         </li>
 
         <li onClick={handleClick}>
           <Link className="link" to={"/profile"}>
-            My Profile
+            {sz.isMobile ? <ChefHat size={iconSize} /> : "My Profile"}
           </Link>
         </li>
 
         <li onClick={handleClick}>
           <a className="link" onClick={logout}>
-            Logout
+            {sz.isMobile ? <LogOut size={iconSize} /> : "Logout"}
           </a>
         </li>
       </ul>

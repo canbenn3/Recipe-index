@@ -30,7 +30,6 @@ export function RecipePage() {
       return;
     }
     const response = await api.deleteRecipe(recipe.id);
-    console.log(response);
     if (response.status !== 200) {
       setDeleteError(true);
       return;

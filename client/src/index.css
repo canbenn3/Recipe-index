@@ -35,6 +35,9 @@
 
 body {
   margin: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
   color: var(--tertiary);
   background: linear-gradient(45deg, var(--primary), var(--primary-dark));
   min-height: 100vh;
@@ -50,9 +53,10 @@ body {
 
 main {
   display: flex;
-  padding: 2rem;
-  width: 94%;
+  padding: 0px;
+  width: 100%;
   justify-content: center;
+  margin-bottom: 100px;
 }
 
 textarea {
@@ -66,7 +70,6 @@ textarea {
 h1 > textarea {
   text-align: center;
 }
-
 
 li {
   align-items: center;
@@ -374,32 +377,34 @@ label {
   list-style: none;
 }
 
-.menu-btn {
-  display: none;
-  font-size: 1.5rem;
-  background: none;
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-dark);
   color: var(--tertiary);
-  border: none;
-  width: auto;
-  cursor: pointer;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
 @media (max-width: 768px) {
-  .menu-btn {
-    display: flex;
-  }
-  .nav-links {
-    position: absolute;
-    top: 60px;
-    right: 0;
-    flex-direction: column;
-    background: var(--contrast);
-    padding: 0.5rem;
-    width: 200px;
-    display: none;
+  body {
+    /* width: 88vw; */
+    width: 100%;
   }
 
-  .nav-links.open {
-    display: flex;
+  .navbar {
+    width: 100%;
+    padding: 0.25rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    padding: 0px;
+    justify-content: space-evenly;
   }
 }

@@ -40,7 +40,6 @@ export function BookDisplay({
   };
 
   const onSave = async () => {
-    console.log("saving recipe book!");
     const response = await api.editRecipeBook({
       ...recipeBook,
       recipes: Array.from(selectedRecipes),
