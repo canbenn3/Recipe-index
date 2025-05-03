@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { RecipeCard } from "../Components/RecipeCard";
-import { recipePage } from "../types/types";
-import { useApi } from "../Hooks/useApi";
+import { RecipeCard } from "../RecipeCard";
+import { recipePage } from "../../types/types";
+import { useApi } from "../../Hooks/useApi";
 
 export function Home() {
   const [page, setPage] = useState(0);

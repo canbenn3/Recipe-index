@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { recipe } from "../types/types";
-import { useApi } from "../Hooks/useApi";
-import { Actions } from "../Components/Actions";
+import { recipe } from "../../types/types";
+import { useApi } from "../../Hooks/useApi";
+import { Actions } from "../Actions";
 import { UploadForm } from "../UploadPage/UploadForm";
 import { Recipe } from "./Recipe";
-import { PrintableRecipe } from "../Components/Printable/PrintableRecipe";
+import { PrintableRecipe } from "../Printable/PrintableRecipe";
 
 export function RecipePage() {
   const [recipe, setRecipe] = useState<recipe | null>(null);
