@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import { recipe } from "../types/types";
+import { cardText } from "../util/util";
 
 interface recipeCardProps {
   recipe: recipe;
@@ -20,7 +21,7 @@ export function RecipeCard({ recipe }: recipeCardProps) {
       <div className="thumbnail-container">
         <img src={image} alt="No image" className="thumbnail"></img>
       </div>
-      <div className="name">{recipe.name}</div>
+      <div className="name">{cardText(recipe?.name)}</div>
     </div>
   );
 }

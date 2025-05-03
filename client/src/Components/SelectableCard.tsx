@@ -1,4 +1,5 @@
 import { recipe } from "../types/types";
+import { cardText } from "../util/util";
 
 interface SelectableCardProps {
   recipe: recipe;
@@ -31,7 +32,7 @@ export function SelectableCard({
           type="checkbox"
           onChange={() => {}} // Prevents warning about uncontrolled checkbox
         />
-        {recipe.name}
+        {cardText(recipe.name)}
       </span>
     </div>
   );
