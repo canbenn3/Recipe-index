@@ -146,8 +146,9 @@ def get_others_recipes(req):
     
 
 def get_home_recipes(req, id):
+    count_per_page = req.GET.get('count_per_page', 25)
     recipes = Recipe.objects.filter()
-    pageManager = Paginator(recipes, 25)
+    pageManager = Paginator(recipes, count_per_page)
     page_num = req.GET.get('page', 1)
     try:
         page = pageManager.page(page_num)

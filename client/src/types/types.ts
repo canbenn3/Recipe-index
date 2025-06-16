@@ -38,3 +38,11 @@ export type recipeBookUpload = {
   description: string;
   recipes: number[];
 };
+
+export type PageManager<T> = {
+  data: T[];
+  has_next: boolean;
+  has_previous: boolean;
+  num_pages: number;
+  current_page: number;
+};

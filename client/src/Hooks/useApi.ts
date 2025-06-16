@@ -1,4 +1,9 @@
-import { recipe, recipeBookUpload, uploadApiProps } from "../types/types";
+import {
+  PageManager,
+  recipe,
+  recipeBookUpload,
+  uploadApiProps,
+} from "../types/types";
 
 const getCSRFToken = () => {
   const csrfToken = document.cookie
@@ -34,8 +39,13 @@ export const useApi = () => ({
     return response.json();
   },
 
-  getHomeRecipes: async (page: number) => {
-    const response = await fetch(`/api/get_home_recipes/${page}`);
+  getHomeRecipes: async (
+    page: number,
+    count_per_page: number
+  ): Promise<PageManager<recipe>> => {
+    const response = await fetch(
+      `/api/get_home_recipes/${page}/?count_per_page=${count_per_page}`
+    );
     const data = await response.json();
     return data;
   },
